@@ -1,1 +1,49 @@
-<p>registrar-component works!</p>
+<div class="login-container">
+  <mat-card class="login-card">
+
+    <mat-card-header class="login-header">
+      <div class="logo-circle">
+        <mat-icon class="logo-icon">person_add</mat-icon> </div>
+      <mat-card-title class="app-title">GYMHUB</mat-card-title>
+      <mat-card-subtitle>Crie sua conta gratuitamente</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="login-form">
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nome Completo</mat-label>
+          <mat-icon matPrefix>badge</mat-icon>
+          <input matInput placeholder="Seu nome" formControlName="nome">
+          <mat-error *ngIf="form.get('nome')?.hasError('required')">O nome é obrigatório</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <mat-icon matPrefix>email</mat-icon>
+          <input matInput type="email" placeholder="exemplo@gymhub.com" formControlName="login">
+          <mat-error *ngIf="form.get('login')?.hasError('email')">Email inválido</mat-error>
+          <mat-error *ngIf="form.get('login')?.hasError('required')">O email é obrigatório</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Senha</mat-label>
+          <mat-icon matPrefix>lock</mat-icon>
+          <input matInput type="password" formControlName="senha">
+          <mat-error *ngIf="form.get('senha')?.hasError('minlength')">Mínimo de 6 caracteres</mat-error>
+        </mat-form-field>
+
+        <button mat-flat-button color="primary" type="submit" class="submit-btn" [disabled]="form.invalid">
+          CRIAR CONTA
+        </button>
+
+      </form>
+    </mat-card-content>
+
+    <mat-card-footer class="login-footer">
+      <p>Já tem uma conta?</p>
+      <a mat-button color="accent" routerLink="/login">FAZER LOGIN</a>
+    </mat-card-footer>
+
+  </mat-card>
+</div>

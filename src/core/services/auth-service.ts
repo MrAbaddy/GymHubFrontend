@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Usuario } from '../models/usuario';
-import {ActivatedRoute, Router} from '@angular/router';
-import {env} from '../../environment/enviorenment';
+import { ActivatedRoute, Router } from '@angular/router';
+// Verifique se o caminho do seu environment está correto (geralmente é ../../environments/environment)
+import { env } from '../../environment/enviorenment';
 
 @Injectable({
   providedIn: 'root',
@@ -11,12 +12,21 @@ export class AuthService {
   private readonly TOKEN_KEY = 'auth_token';
   private readonly USER_KEY = 'auth_user';
 
-  constructor(private httpClient: HttpClient, private router: Router, private route: ActivatedRoute) {
-  }
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   login(login: string, senha: string) {
     return this.httpClient.post<any>(env.apiUrl + "/gymhub/login", {login, senha});
   }
+
+  // --- ADICIONE ISTO PARA CORRIGIR O ERRO TS2339 ---
+  register(nome: string, login: string, senha: string) {
+    return this.httpClient.post<any>(env.apiUrl + "/gymhub/registrar", { nome, login, senha });
+  }
+  // ------------------------------------------------
 
   logout(): void {
     localStorage.removeItem(this.TOKEN_KEY);
@@ -55,7 +65,7 @@ export class AuthService {
       const payload = token.split('.')[1];
       if (!payload) return null;
       const decoded = JSON.parse(atob(payload));
-      console.log('Decoded JWT payload:', decoded);
+
       return {
         id: decoded.sub ?? undefined,
         email: decoded.sub ?? undefined,

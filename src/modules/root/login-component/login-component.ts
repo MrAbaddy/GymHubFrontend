@@ -1,24 +1,25 @@
 import { Component } from '@angular/core';
+// IMPORTS CORRIGIDOS: Usando os Módulos completos
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card'; // Importando Card completo
-import { MatIconModule } from '@angular/material/icon'; // Importando Icones
-import { RouterLink, Router } from '@angular/router';
+import { MatCardModule } from '@angular/material/card'; // Essencial para o card funcionar
+import { MatIconModule } from '@angular/material/icon'; // Essencial se tiver ícones
+import { Router, RouterLink } from '@angular/router'; // RouterLink para links no HTML
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth-service';
 
 @Component({
   selector: 'app-login-component',
-  standalone: true,
+  standalone: true, // Garante que é standalone
   imports: [
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatCardModule, // Adicionado
-    MatIconModule, // Adicionado
+    MatCardModule,
+    MatIconModule,
     ReactiveFormsModule,
-    RouterLink
+    RouterLink // Adicionado caso tenha links como "Criar conta"
   ],
   templateUrl: './login-component.html',
   styleUrl: './login-component.css',
@@ -38,6 +39,9 @@ export class LoginComponent {
   }
 
   protected onSubmit() {
+    // DICA DE DEBUG: Adicionei logs para você ver se o clique chega aqui
+    console.log('Botão clicado. Formulário válido?', this.form.valid);
+
     if (this.form.valid) {
       const {login, senha} = this.form.value;
 
@@ -49,9 +53,11 @@ export class LoginComponent {
         },
         error: (err) => {
           console.error('Login falhou', err);
-          // Aqui você poderia adicionar um MatSnackBar para avisar o usuário
+          // Aqui você pode adicionar lógica para mostrar erro na tela
         }
       });
+    } else {
+      console.log('Formulário inválido, verifique os campos');
     }
   }
 }

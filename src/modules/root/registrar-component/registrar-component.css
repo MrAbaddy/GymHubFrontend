@@ -1,0 +1,11 @@
+/* ... Copie todo o CSS do Login anterior aqui ... */
+
+/* Lembrete do ajuste para o título ficar maiúsculo */
+.app-title {
+  font-size: 1.8rem !important;
+  font-weight: 900;
+  color: #333;
+  margin-bottom: 0.5rem !important;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
