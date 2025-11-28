@@ -1,116 +1,38 @@
-
-.gymhub-navbar {
-  background-color: #000000;
-  color: white;
-  display: flex;
-  align-items: center;
-  padding: 0 24px;
-  height: 70px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
-
-.brand-container {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.logo-circle-small {
-  background-color: white;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.logo-circle-small mat-icon {
-  color: black;
-  font-size: 20px;
-  width: 20px;
-  height: 20px;
-}
-
-.brand-name {
-  font-weight: 900;
-  letter-spacing: 2px;
-  font-size: 1.5rem;
-}
-
 .spacer {
   flex: 1 1 auto;
 }
 
-.welcome-text {
-  margin-right: 20px;
-  font-size: 0.9rem;
-  color: #ccc;
-  display: none;
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-@media(min-width: 600px) {
-  .welcome-text { display: inline; }
-}
-
-.logout-btn {
-  border-radius: 20px;
-}
-
-
-.dashboard-content {
-  padding: 40px;
-  background-color: #f8f9fa;
-  min-height: calc(100vh - 70px);
-}
-
-.page-header {
-  margin-bottom: 30px;
-}
-
-.page-header h1 {
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 5px;
-}
-
-.page-header p {
-  color: #666;
-}
-
-
-.table-container {
-  border-radius: 8px;
-  overflow: hidden;
-  background: white;
+.header-actions {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 table {
   width: 100%;
 }
 
-th.mat-header-cell {
-  background-color: #212121;
-  color: white;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 0.85rem;
-}
-
-td.mat-cell {
-  padding: 16px;
-  color: #444;
+.full-width {
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 .badge {
-  background-color: #e0e0e0;
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
   font-weight: bold;
+  background-color: #e0e0e0;
+  color: #333;
 }
 
 .badge.admin {
-  background-color: #000000;
-  color: white;
+  background-color: #d1c4e9; /* Roxo claro */
+  color: #512da8;
 }

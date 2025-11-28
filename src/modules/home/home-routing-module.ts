@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from './home-component';
 import {DashboardComponent} from './dashboard-component/dashboard-component';
-import {AlunoComponent} from './aluno-component/aluno-component';
 import {homeGuard} from '../../core/security/home-guard';
 
 const routes: Routes = [
@@ -10,7 +9,6 @@ const routes: Routes = [
       [
         {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
         {path: 'dashboard', component: DashboardComponent},
-        {path: 'alunos', component: AlunoComponent}
       ]
   }
 ];
