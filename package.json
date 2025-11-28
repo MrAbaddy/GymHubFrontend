@@ -1,5 +1,5 @@
 {
-  "name": "gyhub-frontend",
+  "name": "gymhub-frontend",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -33,7 +33,7 @@
     "bootstrap": "^5.3.8",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.15.0"
+    "zone.js": "^0.15.1"
   },
   "devDependencies": {
     "@angular/build": "^20.3.9",

@@ -1,0 +1,48 @@
+<div class="login-container">
+  <mat-card class="login-card">
+
+
+    <mat-card-header class="login-header">
+      <div class="logo-circle">
+        <mat-icon class="logo-icon">fitness_center</mat-icon>
+      </div>
+      <mat-card-title class="app-title">GYMHUB</mat-card-title>
+      <mat-card-subtitle>Sua academia em um só lugar!</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="login-form">
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <mat-icon matPrefix>email</mat-icon>
+          <input matInput type="email" placeholder="exemplo@gymhub.com" formControlName="login">
+          <mat-error *ngIf="form.get('login')?.hasError('required')">
+            O email é obrigatório
+          </mat-error>
+          <mat-error *ngIf="form.get('login')?.hasError('email')">
+            Digite um email válido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Senha</mat-label>
+          <mat-icon matPrefix>lock</mat-icon>
+          <input matInput type="password" formControlName="senha">
+          <mat-error>A senha é obrigatória</mat-error>
+        </mat-form-field>
+
+        <button mat-flat-button color="primary" type="submit" class="submit-btn" [disabled]="form.invalid">
+          ACESSAR
+        </button>
+
+      </form>
+    </mat-card-content>
+
+    <mat-card-footer class="login-footer">
+      <p>Ainda não é membro?</p>
+      <a mat-button color="accent" routerLink="/registrar">FAÇA SUA CONTA</a>
+    </mat-card-footer>
+
+  </mat-card>
+</div>

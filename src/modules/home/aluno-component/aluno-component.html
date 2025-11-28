@@ -1,0 +1,65 @@
+<div class="d-flex flex-column align-items-center mt-4">
+  <h1>Gestão de Alunos</h1>
+  <p>Gerencie as informações dos alunos aqui.</p>
+</div>
+
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="editing ? atualizarAluno() : adicionarAluno()" class="mb-4">
+    <div class="d-flex">
+      <mat-form-field appearance="outline" class="me-2 flex-grow-1">
+        <mat-label>Nome do Aluno</mat-label>
+        <input matInput type="text" formControlName="nome">
+        <mat-error>
+          Nome é obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="me-2 flex-grow-1">
+        <mat-label>Email do Aluno</mat-label>
+        <input matInput type="email" formControlName="email">
+        <mat-error>
+          Email é obrigatório
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="d-flex justify-content-center">
+      <button mat-raised-button color="primary" type="submit">
+        {{ editing ? 'Atualizar Aluno' : 'Adicionar Aluno' }}
+      </button>
+    </div>
+  </form>
+
+  @if (dados.length === 0) {
+    <p class="text-center mt-2">Nenhum aluno cadastrado.</p>
+  } @else {
+    <table class="table table-responsive table-secondary mt-2">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Email</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (dado of dados; track dado.id) {
+          <tr>
+            <td>{{ dado.id }}</td>
+            <td>{{ dado.nome }}</td>
+            <td>{{ dado.email }}</td>
+            <td class="text-end">
+              <button mat-button (click)="editarAluno(dado)">
+                <mat-icon>edit</mat-icon>
+                Editar
+              </button>
+              <button mat-button (click)="deletarAluno(dado)">
+                <mat-icon>delete</mat-icon>
+                Deletar
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

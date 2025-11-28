@@ -1,0 +1,81 @@
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <h1>Painel de Controle GymHub</h1>
+    <p>Visão geral da sua academia hoje</p>
+  </header>
+
+  <!-- O Grid List usa os imports MatGridList e MatGridTile -->
+  <mat-grid-list cols="3" rowHeight="200px" gutterSize="16px">
+
+    <!-- CARD 1: Alunos Ativos -->
+    <mat-grid-tile>
+      <mat-card class="dashboard-card status-card">
+        <mat-card-header>
+          <mat-icon mat-card-avatar class="icon-header">groups</mat-icon>
+          <mat-card-title>Alunos Ativos</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="stat-value">128</div>
+          <div class="stat-label">+5 essa semana</div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <!-- CARD 2: Treinos Hoje -->
+    <mat-grid-tile>
+      <mat-card class="dashboard-card status-card">
+        <mat-card-header>
+          <mat-icon mat-card-avatar class="icon-header">fitness_center</mat-icon>
+          <mat-card-title>Treinos Hoje</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="stat-value">42</div>
+          <div class="stat-label">Check-ins realizados</div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <!-- CARD 3: Faturamento (Financeiro) -->
+    <mat-grid-tile>
+      <mat-card class="dashboard-card status-card">
+        <mat-card-header>
+          <mat-icon mat-card-avatar class="icon-header">monetization_on</mat-icon>
+          <mat-card-title>Receita Mensal</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="stat-value">R$ 12.500</div>
+          <div class="stat-label">Meta: 85% atingida</div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <!-- CARD 4: Ações Rápidas (Ocupa 2 colunas se quiser, mas deixei 1x1 simples) -->
+    <!-- Usa MatButton e RouterLink -->
+    <mat-grid-tile [colspan]="3" [rowspan]="1">
+      <mat-card class="dashboard-card action-card">
+        <mat-card-header>
+          <mat-card-title>Ações Rápidas</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="actions-container">
+
+          <button mat-raised-button color="primary" routerLink="/alunos/novo">
+            <mat-icon>person_add</mat-icon>
+            Novo Aluno
+          </button>
+
+          <button mat-stroked-button routerLink="/treinos/novo">
+            <mat-icon>edit_calendar</mat-icon>
+            Agendar Avaliação
+          </button>
+
+          <button mat-stroked-button routerLink="/financeiro">
+            <mat-icon>payments</mat-icon>
+            Lançar Pagamento
+          </button>
+
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+</div>

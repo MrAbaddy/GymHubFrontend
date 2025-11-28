@@ -1,0 +1,24 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #000;
+}
+:host {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  overflow: hidden;
+}
+mat-card {
+  background: #111;
+  color: white;
+  padding: 20px;
+  border-radius: 16px;
+  max-height: 90vh;
+  overflow: hidden;
+}
