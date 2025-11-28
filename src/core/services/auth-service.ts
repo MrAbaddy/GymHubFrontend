@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Usuario } from '../models/usuario';
 import { ActivatedRoute, Router } from '@angular/router';
-// Verifique se o caminho do seu environment está correto (geralmente é ../../environments/environment)
 import { env } from '../../environment/enviorenment';
 
 @Injectable({

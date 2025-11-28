@@ -4,10 +4,8 @@
     <p>Visão geral da sua academia hoje</p>
   </header>
 
-  <!-- O Grid List usa os imports MatGridList e MatGridTile -->
   <mat-grid-list cols="3" rowHeight="200px" gutterSize="16px">
 
-    <!-- CARD 1: Alunos Ativos -->
     <mat-grid-tile>
       <mat-card class="dashboard-card status-card">
         <mat-card-header>
@@ -21,7 +19,6 @@
       </mat-card>
     </mat-grid-tile>
 
-    <!-- CARD 2: Treinos Hoje -->
     <mat-grid-tile>
       <mat-card class="dashboard-card status-card">
         <mat-card-header>
@@ -35,7 +32,6 @@
       </mat-card>
     </mat-grid-tile>
 
-    <!-- CARD 3: Faturamento (Financeiro) -->
     <mat-grid-tile>
       <mat-card class="dashboard-card status-card">
         <mat-card-header>
@@ -49,8 +45,6 @@
       </mat-card>
     </mat-grid-tile>
 
-    <!-- CARD 4: Ações Rápidas (Ocupa 2 colunas se quiser, mas deixei 1x1 simples) -->
-    <!-- Usa MatButton e RouterLink -->
     <mat-grid-tile [colspan]="3" [rowspan]="1">
       <mat-card class="dashboard-card action-card">
         <mat-card-header>

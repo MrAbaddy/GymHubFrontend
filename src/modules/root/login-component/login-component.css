@@ -4,20 +4,18 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #000000; /* Fundo preto */
+  background-color: #000000;
   padding: 20px;
 }
 
-/* O cartão de login */
 .login-card {
   max-width: 400px;
   width: 100%;
   padding: 2rem 1rem;
-  border-radius: 16px; /* Bordas arredondadas modernas */
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* Sombra suave */
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
-/* Cabeçalho */
 .login-header {
   display: flex;
   flex-direction: column;
@@ -26,7 +24,6 @@
   text-align: center;
 }
 
-/* Ícone circular do logo */
 .logo-circle {
   background-color: #e8eaf6;
   width: 64px;
@@ -47,42 +44,37 @@
 
 .app-title {
   font-size: 1.8rem !important;
-  font-weight: 900; /* Aumentei para 900 para ficar mais "Bold" */
-  color: #333;
+  font-weight: 900;
   margin-bottom: 0.5rem !important;
-  text-transform: uppercase; /* Transforma em GYMHUB automaticamente */
-  letter-spacing: 2px; /* Espaçamento para dar elegância */
-}
+  text-transform: uppercase;
 
-/* Formulário */
-.login-form {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
 
-.full-width {
-  width: 100%;
-}
+  .full-width {
+    width: 100%;
+  }
 
-/* Botão de submit */
-.submit-btn {
-  height: 48px;
-  font-size: 1rem;
-  letter-spacing: 1px;
-  margin-top: 1rem;
-  border-radius: 8px;
-}
+  .submit-btn {
+    height: 48px;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    margin-top: 1rem;
+    border-radius: 8px;
+  }
 
-/* Rodapé */
-.login-footer {
-  text-align: center;
-  margin-top: 1.5rem;
-  padding-bottom: 1rem;
-}
+  .login-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-bottom: 1rem;
+  }
 
-.login-footer p {
-  color: #666;
-  margin-bottom: 0;
-  font-size: 0.9rem;
+  .login-footer p {
+    color: #666;
+    margin-bottom: 0;
+    font-size: 0.9rem;
+  }
 }

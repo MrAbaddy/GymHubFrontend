@@ -7,7 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../../../core/services/auth-service'; // Verifique se o caminho está correto
+import { AuthService } from '../../../core/services/auth-service';
 
 @Component({
   selector: 'app-registrar-component',
@@ -22,11 +22,10 @@ import { AuthService } from '../../../core/services/auth-service'; // Verifique 
     ReactiveFormsModule,
     RouterLink
   ],
-  templateUrl: './registrar-component.html', // Liga com o seu HTML
+  templateUrl: './registrar-component.html',
   styleUrl: './registrar-component.css'
 })
 export class RegistrarComponent {
-  // AQUI está a variável 'form' que o HTML estava procurando e não achava
   form: FormGroup;
 
   constructor(
@@ -34,7 +33,6 @@ export class RegistrarComponent {
     private authService: AuthService,
     private router: Router
   ) {
-    // Inicializa o formulário
     this.form = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(3)]],
       login: ['', [Validators.required, Validators.email]],
@@ -42,7 +40,6 @@ export class RegistrarComponent {
     });
   }
 
-  // AQUI está a função 'onSubmit' que o HTML estava procurando
   onSubmit() {
     if (this.form.valid) {
       const { nome, login, senha } = this.form.value;
