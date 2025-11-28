@@ -1,0 +1,34 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #1a73e8, #0049b7);
+}
+
+.login-card {
+  width: 380px;
+  padding: 30px;
+  border-radius: 16px;
+  background: #ffffffee;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, .15);
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+button {
+  background: #1a73e8 !important;
+  color: white !important;
+  font-weight: 600;
+}
+
+a {
+  color: #1a73e8;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

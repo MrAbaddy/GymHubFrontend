@@ -1,0 +1,15 @@
+<div class="container mt-5">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="w-100">
+      <input matInput placeholder="Login" formControlName="login" />
+      <mat-error *ngIf="loginForm.get('login')?.hasError('required')">Login obrigatório</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <input matInput type="password" placeholder="Senha" formControlName="senha" />
+      <mat-error *ngIf="loginForm.get('senha')?.hasError('required')">Senha obrigatória</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Entrar</button>
+  </form>
+</div>
