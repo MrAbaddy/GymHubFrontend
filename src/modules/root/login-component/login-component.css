@@ -1,80 +1,67 @@
-/* Fundo da tela inteira centralizado */
-.login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #000000;
-  padding: 20px;
-}
 
 .login-card {
-  max-width: 400px;
   width: 100%;
-  padding: 2rem 1rem;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  max-width: 400px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .login-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 2rem;
-  text-align: center;
+  margin-bottom: 20px;
 }
 
 .logo-circle {
-  background-color: #e8eaf6;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #3f51b5;
+  margin-bottom: 10px;
 }
 
 .logo-icon {
-  font-size: 32px;
-  width: 32px;
-  height: 32px;
-  color: #3f51b5;
+  color: white;
+  font-size: 36px;
 }
 
 .app-title {
-  font-size: 1.8rem !important;
-  font-weight: 900;
-  margin-bottom: 0.5rem !important;
-  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
 
-  .login-form {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  .full-width {
-    width: 100%;
-  }
+.full-width {
+  width: 100%;
+}
 
-  .submit-btn {
-    height: 48px;
-    font-size: 1rem;
-    letter-spacing: 1px;
-    margin-top: 1rem;
-    border-radius: 8px;
-  }
+.submit-btn {
+  width: 100%;
+  margin-top: 10px;
+}
 
-  .login-footer {
-    text-align: center;
-    margin-top: 1.5rem;
-    padding-bottom: 1rem;
-  }
+.login-footer {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  .login-footer p {
-    color: #666;
-    margin-bottom: 0;
-    font-size: 0.9rem;
-  }
+.login-footer a {
+  margin-top: 5px;
 }
