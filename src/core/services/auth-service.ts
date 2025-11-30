@@ -21,11 +21,9 @@ export class AuthService {
     return this.httpClient.post<any>(env.apiUrl + "/gymhub/login", {login, senha});
   }
 
-  // --- ADICIONE ISTO PARA CORRIGIR O ERRO TS2339 ---
   register(nome: string, login: string, senha: string) {
     return this.httpClient.post<any>(env.apiUrl + "/gymhub/registrar", { nome, login, senha });
   }
-  // ------------------------------------------------
 
   logout(): void {
     localStorage.removeItem(this.TOKEN_KEY);

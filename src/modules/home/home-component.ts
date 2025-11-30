@@ -1,14 +1,14 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core'; // Adicionado ViewChild e TemplateRef
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import {MatButton, MatButtonModule} from '@angular/material/button';
+import {MatIcon, MatIconModule} from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { MatCardModule } from '@angular/material/card';
+import {MatCard, MatCardContent, MatCardHeader, MatCardModule, MatCardTitle} from '@angular/material/card';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select'; // Adicionado para o dropdown de permissão
+import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../core/services/auth-service';
 import { UsuarioService, DadosUsuario } from '../../core/services/usuário.service';
@@ -26,9 +26,12 @@ import { UsuarioService, DadosUsuario } from '../../core/services/usuário.servi
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule, // Importante para o select de permissão
+    MatSelectModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCard,
+    MatIcon,
+    MatButton
   ],
   templateUrl: './home-component.html',
   styleUrls: ['./home-component.css']
@@ -40,11 +43,11 @@ export class HomeComponent implements OnInit {
 
   formUsuario!: FormGroup;
   editandoUsuario: DadosUsuario | null = null;
+  usuarioParaExcluir: DadosUsuario | null = null;
 
-  // Referência ao template do modal no HTML
   @ViewChild('dialogTemplate') dialogTemplate!: TemplateRef<any>;
+  @ViewChild('confirmDialogTemplate') confirmDialogTemplate!: TemplateRef<any>;
 
-  // Referência para poder fechar o modal via código se necessário
   dialogRef!: MatDialogRef<any>;
 
   constructor(
@@ -58,11 +61,10 @@ export class HomeComponent implements OnInit {
     this.usuarioLogado = this.authService.getUser();
     this.carregarUsuarios();
 
-    // Inicializa o formulário base
     this.formUsuario = this.fb.group({
       nome: ['', Validators.required],
       login: ['', [Validators.required, Validators.email]],
-      senha: [''], // Validadores adicionados dinamicamente no abrirDialog
+      senha: [''],
       permissao: ['', Validators.required]
     });
   }
@@ -74,39 +76,29 @@ export class HomeComponent implements OnInit {
       },
       error: (err) => {
         console.error('Erro ao listar usuários', err);
-        // Aqui você pode adicionar um SnackBar de erro
       }
     });
   }
 
   abrirDialog(usuario?: DadosUsuario) {
-    // Limpa validadores de senha antigos para evitar conflitos
     this.formUsuario.get('senha')?.clearValidators();
 
     if (usuario) {
-      // --- MODO EDIÇÃO ---
       this.editandoUsuario = usuario;
       this.formUsuario.patchValue(usuario);
-
-      // Senha opcional na edição. Só valida se o usuário digitar algo.
       this.formUsuario.get('senha')?.setValidators([Validators.minLength(6)]);
-      // O campo senha deve vir vazio para não sobrescrever a hash antiga com texto plano
       this.formUsuario.get('senha')?.setValue('');
     } else {
-      // --- MODO CRIAÇÃO ---
       this.editandoUsuario = null;
       this.formUsuario.reset();
-
-      // Senha obrigatória na criação
       this.formUsuario.get('senha')?.setValidators([Validators.required, Validators.minLength(6)]);
     }
 
-    // Atualiza o status do campo senha com os novos validadores
     this.formUsuario.get('senha')?.updateValueAndValidity();
 
     this.dialogRef = this.dialog.open(this.dialogTemplate, {
-      width: '400px', // Define uma largura padrão para não ficar espremido
-      disableClose: true // Impede fechar clicando fora (opcional)
+      width: '400px',
+      disableClose: true
     });
   }
 
@@ -116,7 +108,6 @@ export class HomeComponent implements OnInit {
     const usuarioForm: DadosUsuario = this.formUsuario.value;
 
     if (this.editandoUsuario) {
-      // Atualizar
       this.usuarioService.atualizar(this.editandoUsuario.id, usuarioForm).subscribe({
         next: () => {
           this.carregarUsuarios();
@@ -125,7 +116,6 @@ export class HomeComponent implements OnInit {
         error: (err) => console.error('Erro ao atualizar', err)
       });
     } else {
-
       this.usuarioService.criar(usuarioForm).subscribe({
         next: () => {
           this.carregarUsuarios();
@@ -137,10 +127,19 @@ export class HomeComponent implements OnInit {
   }
 
   excluirUsuario(usuario: DadosUsuario) {
-    if (confirm(`Deseja realmente excluir o usuário ${usuario.nome}?`)) {
-      this.usuarioService.excluir(usuario.id).subscribe({
+    this.usuarioParaExcluir = usuario;
+    this.dialogRef = this.dialog.open(this.confirmDialogTemplate, {
+      width: '350px'
+    });
+  }
+
+  confirmarExclusao() {
+    if (this.usuarioParaExcluir) {
+      this.usuarioService.excluir(this.usuarioParaExcluir.id).subscribe({
         next: () => {
           this.carregarUsuarios();
+          this.dialogRef.close();
+          this.usuarioParaExcluir = null;
         },
         error: (err) => console.error('Erro ao excluir', err)
       });
@@ -148,7 +147,9 @@ export class HomeComponent implements OnInit {
   }
 
   fecharDialog() {
-    this.dialogRef.close();
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
   }
 
   logout() {

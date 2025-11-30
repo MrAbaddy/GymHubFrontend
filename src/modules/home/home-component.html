@@ -7,14 +7,14 @@
 </mat-toolbar>
 
 <div class="container">
-  <div class="header-actions">
-    <button mat-raised-button color="accent" (click)="abrirDialog()">
-      <mat-icon>add</mat-icon> Novo Usuário
-    </button>
-  </div>
+  <mat-card class="content-card">
+    <div class="header-actions">
+      <button mat-raised-button color="primary" (click)="abrirDialog()">
+        <mat-icon>add</mat-icon> Novo Usuário
+      </button>
+    </div>
 
-  <mat-card class="table-container">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z0 full-width-table">
 
       <ng-container matColumnDef="nome">
         <th mat-header-cell *matHeaderCellDef> Nome </th>
@@ -48,70 +48,68 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </mat-card>
 </div>
 
 <ng-template #dialogTemplate>
-  <h2 mat-dialog-title>{{ editandoUsuario ? 'Editar' : 'Novo' }} Usuário</h2>
+  <h2 mat-dialog-title>
+    {{ editandoUsuario ? 'Editar Usuário' : 'Novo Usuário' }}
+  </h2>
 
   <mat-dialog-content>
-    <form [formGroup]="formUsuario" class="form-dialog">
+    <form [formGroup]="formUsuario" style="display: flex; flex-direction: column; gap: 10px; padding-top: 5px;">
 
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline">
         <mat-label>Nome Completo</mat-label>
         <input matInput formControlName="nome" placeholder="Ex: João Silva">
-
-        @if (formUsuario.hasError('required', 'nome')) {
-          <mat-error>Nome é obrigatório</mat-error>
-        }
+        <mat-error *ngIf="formUsuario.get('nome')?.invalid">Nome é obrigatório</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline">
         <mat-label>Email (Login)</mat-label>
-        <input matInput formControlName="login" type="email" placeholder="email@exemplo.com">
-
-        @if (formUsuario.hasError('required', 'login')) {
-          <mat-error>Email é obrigatório</mat-error>
-        }
-        @if (formUsuario.hasError('email', 'login')) {
-          <mat-error>Email inválido</mat-error>
-        }
+        <input matInput formControlName="login" type="email">
+        <mat-error *ngIf="formUsuario.get('login')?.invalid">Email válido é obrigatório</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline">
         <mat-label>Senha</mat-label>
-        <input matInput formControlName="senha" type="password"
-               [placeholder]="editandoUsuario ? 'Deixe vazio para manter a atual' : 'Mínimo 6 caracteres'">
-
-        @if (formUsuario.hasError('required', 'senha')) {
-          <mat-error>Senha é obrigatória</mat-error>
-        }
-        @if (formUsuario.hasError('minlength', 'senha')) {
-          <mat-error>A senha deve ter no mínimo 6 caracteres</mat-error>
-        }
+        <input matInput formControlName="senha" type="password">
+        <mat-error *ngIf="formUsuario.get('senha')?.invalid">Senha mínima de 6 caracteres</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline">
         <mat-label>Permissão</mat-label>
         <mat-select formControlName="permissao">
           <mat-option value="ADMIN">Administrador</mat-option>
           <mat-option value="USER">Usuário Comum</mat-option>
         </mat-select>
-
-        @if (formUsuario.hasError('required', 'permissao')) {
-          <mat-error>Permissão é obrigatória</mat-error>
-        }
       </mat-form-field>
 
     </form>
   </mat-dialog-content>
 
   <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Cancelar</button>
-    <button mat-flat-button color="primary" (click)="salvarUsuario()" [disabled]="formUsuario.invalid">
+    <button mat-button (click)="fecharDialog()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="salvarUsuario()" [disabled]="formUsuario.invalid">
       Salvar
     </button>
+  </mat-dialog-actions>
+</ng-template>
+
+<ng-template #confirmDialogTemplate>
+  <h2 mat-dialog-title>Confirmação</h2>
+
+  <mat-dialog-content>
+    <p>Você tem certeza que deseja excluir este usuário?</p>
+    <p *ngIf="usuarioParaExcluir" style="color: #f44336; font-weight: bold;">
+      {{ usuarioParaExcluir.nome }}
+    </p>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="fecharDialog()">Não</button>
+    <button mat-flat-button color="warn" (click)="confirmarExclusao()">Sim</button>
   </mat-dialog-actions>
 </ng-template>
